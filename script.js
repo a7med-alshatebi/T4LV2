@@ -8,7 +8,7 @@ menuIcon.onclick = () => {
 
 
 //dark mode //
-/*
+
 const sunIcon = document.querySelector('#sun-icon');
 const moonIcon = document.querySelector('#moon-icon');
 //
