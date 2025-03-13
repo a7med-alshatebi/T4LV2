@@ -9,59 +9,23 @@ menuIcon.onclick = () => {
 
 //dark mode //
 
-const sunIcon = document.querySelector('#sun-icon');
-const moonIcon = document.querySelector('#moon-icon');
-//
-const usertheme = localStorage.getItem('theme');
-const systemtheme = window.matchMedia('(prefers-color-scheme: dark)');
-//
 
-const iconToggle = () => {
-  moonIcon.classList.toggle('display-none');
-  sunIcon.classList.toggle('display-none');
-};
+// Check for saved user preference in localStorage
+const savedTheme = localStorage.getItem('theme');
 
-//
-
-const themecheck = () => {
-  if (usertheme === 'dark' || (!usertheme && systemtheme)) {
-    document.documentElement.classList.add('dark');
-    return;
-  }
-  sunIcon.classList.add('display-none');
+// Apply the saved theme if it exists
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+} else if (savedTheme === 'light') {
+    document.body.classList.remove('dark');
 }
 
-//
+// Toggle theme and save preference to localStorage
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const isDarkMode = document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
 
-const themeswitch = () => {
-  if(document.documentElement.classList.contains('dark')) {
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
-    iconToggle();
-    return;
-  }
-  document.documentElement.classList.add('dark');
-  localStorage.setItem('theme', 'dark');
-  iconToggle();
-};
-
-//
-
-sunIcon.addEventListener('click', themeswitch);
-moonIcon.addEventListener('click', themeswitch);
-themecheck();
-*/
-//dark mode end//
-
-//scroll to top//
-const scrollToTop = document.querySelector('#scroll-to-top');
-scrollToTop.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
-//scroll to top end//
-
-
-
+// Attach the toggleTheme function to the button's onclick event
+document.querySelector('button').onclick = toggleTheme;
